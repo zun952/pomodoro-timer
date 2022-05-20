@@ -3,7 +3,7 @@
     <swiper>
         <ng-template swiperSlide *ngFor="let slide of slides">
             <div id="circle">
-                <div id="timer">00:00</div>
+                <div id="timer" (click)="onClick()">00:00</div>
                 <button id="button-start">start</button>
             </div>
         </ng-template>

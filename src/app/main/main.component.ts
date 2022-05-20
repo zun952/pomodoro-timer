@@ -12,9 +12,6 @@ import SwiperCore, { SwiperOptions } from "swiper";
       (swiper)="onSwiper($event)"
       (slideChange)="onSlideChange()"
     >
-      <ng-template swiperSlide>Slide 1</ng-template>
-      <ng-template swiperSlide>Slide 2</ng-template>
-      <ng-template swiperSlide>Slide 3</ng-template>
     </swiper>
   `
 })
@@ -23,14 +20,19 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  slides: string[] = Array.from({length: 2}).map(
+  slides: string[] = Array.from({length: 5}).map(
     (el, index) => `Slide ${index + 1}`)
 
   config: SwiperOptions = {
+    loop: true,
     slidesPerView: 1,
     spaceBetween: 50,
     navigation: true,
     pagination: {clickable: true}
+  }
+
+  onClick(){
+    console.log(`clicked`)
   }
 
   onSwiper([swiper] : any[]){
