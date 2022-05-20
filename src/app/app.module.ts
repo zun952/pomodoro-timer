@@ -4,16 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 
-import { SwiperModule } from "swiper/angular";
-
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent
   ],
   imports: [
-    BrowserModule,
-    SwiperModule
+    BrowserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
