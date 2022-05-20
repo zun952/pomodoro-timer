@@ -1,17 +1,7 @@
-div{
-    font-family: consolas;
-}
-
-#header{
-    font-size: 70px;
-    color: white;
-    text-align: center;
-}
-
 #circle{
-    height: 350px;
-    width: 350px;
-    margin-top: 13%;
+    height: 400px;
+    width: 400px;
+    margin-top: 20%;
     margin-left: auto;
     margin-right: auto;
     border-radius: 50%;
@@ -23,6 +13,7 @@ div{
     padding-top: 43%;
     font-weight: bold;
     color: white;
+    font-family: Consolas;
     font-size: xxx-large;
 }
 
@@ -32,5 +23,6 @@ div{
     color: white;
     background: purple;
     border-color: purple;
+    font-family: Consolas;
     font-size: larger;
 }
