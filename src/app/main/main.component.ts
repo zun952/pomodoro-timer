@@ -1,35 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
-import SwiperCore, { SwiperOptions } from "swiper";
+import SwiperCore, { Navigation, Pagination, Scrollbar, SwiperOptions } from "swiper";
+import { SwiperComponent } from 'swiper/angular';
+
+SwiperCore.use([Navigation, Pagination])
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
-  template:`
-    <swiper
-      [config]="config"
-      (swiper)="onSwiper($event)"
-      (slideChange)="onSlideChange()"
-    >
-    </swiper>
-  `
+  styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  constructor() { }
+  @ViewChild('swiperRef', { static: false }) swiperRef?: SwiperComponent;
 
-  ngOnInit(): void { }
+  constructor(private cd: ChangeDetectorRef, private ngZone: NgZone) { }
 
-  slides: string[] = Array.from({length: 5}).map(
-    (el, index) => `Slide ${index + 1}`)
+  ngOnInit(): void {  }
 
   config: SwiperOptions = {
-    loop: true,
-    slidesPerView: 1,
-    spaceBetween: 50,
+    pagination: {
+      clickable: true
+    },
     navigation: true,
-    pagination: {clickable: true}
+    spaceBetween: 20
   }
+
+  slidesEx = ['first', 'second']
 
   onClick(){
     console.log(`clicked`)
@@ -39,7 +36,13 @@ export class MainComponent implements OnInit {
     console.log(swiper)
   }
 
-  onSlideChange(){
-    console.log('slide change')
+  onSlideChange(swiper: any){
+    if(swiper.isEnd){
+      this.ngZone.run(() => {
+        this.slidesEx = [...this.slidesEx, `added ${this.slidesEx.length - 1}`];
+      });
+
+      console.log(this.slidesEx);
+    }
   }
 }
