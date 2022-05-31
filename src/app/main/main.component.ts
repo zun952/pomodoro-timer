@@ -9,7 +9,8 @@ export class MainComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  onSwiper([swiper]: any){
+    console.log(swiper);
   }
 
 }
