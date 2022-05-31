@@ -1,7 +1,6 @@
 import { Component, OnInit, NgZone, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
-import SwiperCore, { Navigation, Pagination, Scrollbar, SwiperOptions } from "swiper";
+import SwiperCore, { Navigation, Pagination, SwiperOptions } from "swiper";
 import { SwiperComponent } from 'swiper/angular';
 
 SwiperCore.use([Navigation, Pagination])
@@ -19,11 +18,13 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {  }
 
   config: SwiperOptions = {
+    slidesPerView: 'auto',
+    autoHeight: true,
     pagination: {
       clickable: true
     },
     navigation: true,
-    spaceBetween: 20
+    spaceBetween: 10
   }
 
   slidesEx = ['first', 'second']

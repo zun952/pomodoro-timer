@@ -1,11 +1,26 @@
 <div id="header">POMODORO TIMER</div>
-<div>
+<div id="main">
     <swiper [config]="config" (slideChange)="onSlideChange($event)">
         <ng-template swiperSlide>
-            slide 1
+            <div id="circle">
+                <div id="timer">00:00</div>
+                <button id="button-start">START</button>
+            </div>
         </ng-template>
-        <ng-template swiperSlide> slide 2</ng-template>
 
+        <ng-template swiperSlide>
+            <div id="circle">
+                <div id="timer">00:00</div>
+                <button id="button-start">START</button>
+            </div>
+        </ng-template>
+
+        <ng-template swiperSlide>
+            <div id="circle">
+                <div id="timer">00:00</div>
+                <button id="button-start">START</button>
+            </div>
+        </ng-template>
     </swiper>
 </div>
 <div id="footer"></div>
