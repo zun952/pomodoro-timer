@@ -33,8 +33,7 @@ export class MainComponent implements OnInit {
     console.log(`clicked`)
   }
 
-  onSwiper([swiper] : any[]){
-    console.log(swiper)
+  ngOnInit(): void {
   }
 
   onSlideChange(swiper: any){
