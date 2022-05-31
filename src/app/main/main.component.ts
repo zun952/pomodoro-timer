@@ -33,9 +33,6 @@ export class MainComponent implements OnInit {
     console.log(`clicked`)
   }
 
-  ngOnInit(): void {
-  }
-
   onSlideChange(swiper: any){
     if(swiper.isEnd){
       this.ngZone.run(() => {
