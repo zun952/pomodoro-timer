@@ -1,21 +1,28 @@
 import { Component, OnInit, NgZone, ViewChild, ChangeDetectorRef } from '@angular/core';
 
-import SwiperCore, { Navigation, Pagination, SwiperOptions } from "swiper";
+import { Navigation, Pagination, Swiper, SwiperOptions } from "swiper";
 import { SwiperComponent } from 'swiper/angular';
 
-SwiperCore.use([Navigation, Pagination])
+Swiper.use([Navigation, Pagination])
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
+
 export class MainComponent implements OnInit {
   @ViewChild('swiperRef', { static: false }) swiperRef?: SwiperComponent;
 
-  constructor(private cd: ChangeDetectorRef, private ngZone: NgZone) { }
+  constructor(private ngZone: NgZone) { }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
+
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    console.log(this.swiperRef?.swiperRef);
+  }
 
   config: SwiperOptions = {
     slidesPerView: 'auto',
@@ -24,7 +31,7 @@ export class MainComponent implements OnInit {
       clickable: true
     },
     navigation: true,
-    spaceBetween: 10
+    spaceBetween: 50
   }
 
   slidesEx = ['first', 'second']

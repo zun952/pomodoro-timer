@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { SwiperComponent, SwiperModule } from 'swiper/angular';
+import { SwiperModule } from 'swiper/angular';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';

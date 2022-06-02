@@ -1,6 +1,6 @@
 <div id="header">POMODORO TIMER</div>
 <div id="main">
-    <swiper [config]="config" (slideChange)="onSlideChange($event)">
+    <swiper [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange($event)" #timerSwiper>
         <ng-template swiperSlide>
             <div id="circle">
                 <div id="timer">00:00</div>
