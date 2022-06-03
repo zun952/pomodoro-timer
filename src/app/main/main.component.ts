@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ViewChild, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { Navigation, Pagination, Swiper, SwiperOptions } from "swiper";
 import { SwiperComponent } from 'swiper/angular';
@@ -18,12 +18,6 @@ export class MainComponent implements OnInit {
   constructor(private ngZone: NgZone) { }
 
   ngOnInit(): void { }
-
-  ngAfterViewInit(): void {
-    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
-    //Add 'implements AfterViewInit' to the class.
-    console.log(this.swiperRef?.swiperRef);
-  }
 
   config: SwiperOptions = {
     slidesPerView: 'auto',
