@@ -3,6 +3,8 @@ import { Component, OnInit, NgZone, ViewChild, ViewEncapsulation } from '@angula
 import { Navigation, Pagination, Swiper, SwiperOptions } from "swiper";
 import { SwiperComponent } from 'swiper/angular';
 
+import { Timer } from "../timer";
+
 Swiper.use([Navigation, Pagination])
 
 @Component({
@@ -14,8 +16,26 @@ Swiper.use([Navigation, Pagination])
 
 export class MainComponent implements OnInit {
   @ViewChild('swiperRef', { static: false }) swiperRef?: SwiperComponent;
+  timerFocus: Timer;
+  timerShortBreak: Timer;
+  timerLongBreak: Timer;
 
-  constructor(private ngZone: NgZone) { }
+  constructor(private ngZone: NgZone) {
+    this.timerFocus = {
+      time: new Date(0, 0, 0, 0, 15),
+      isRunning: false
+    };
+  
+    this.timerShortBreak = {
+      time: new Date(0, 0, 0, 0, 5),
+      isRunning: false
+    };
+    
+    this.timerLongBreak = {
+      time: new Date(0, 0, 0, 0, 30),
+      isRunning: false
+    };
+  }
 
   ngOnInit(): void { }
 
@@ -29,19 +49,17 @@ export class MainComponent implements OnInit {
 
   slidesEx = ['first', 'second']
 
-  onClick(){
-    console.log(`clicked`)
+  
+
+  onClick(event: any){
+    console.log(event)
   }
 
-  onSwiper([swiper]: any){
+  onSwiper(swiper: any){
     console.log(swiper);
   }
 
-  onSlideChange(swiper: any){
-    if(swiper.isEnd){
-      this.ngZone.run(() => {
-
-      });
-    }
+  onSlideChange([swiper]: any){
+    console.log(swiper);
   }
 }

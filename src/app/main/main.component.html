@@ -3,22 +3,22 @@
     <swiper [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange($event)">
         <ng-template swiperSlide>
             <div id="circle">
-                <div id="timer">25:00</div>
-                <button id="button-start" (click)="onClick()">START</button>
+                <div id="timer">{{timerFocus.time | date: 'mm:ss'}}</div>
+                <button id="button-start" (click)="onClick($event)">START</button>
             </div>
         </ng-template>
 
         <ng-template swiperSlide>
             <div id="circle">
-                <div id="timer" #shortBreak>05:00</div>
-                <button id="button-start" (click)="onClick()">START</button>
+                <div id="timer" #shortBreak>{{timerShortBreak.time | date: 'mm:ss'}}</div>
+                <button id="button-start" (click)="onClick($event)">START</button>
             </div>
         </ng-template>
 
         <ng-template swiperSlide>
             <div id="circle">
-                <div id="timer" #longBreak>30:00</div>
-                <button id="button-start" (click)="onClick()">START</button>
+                <div id="timer" #longBreak>{{timerLongBreak.time | date: 'mm:ss'}}</div>
+                <button id="button-start" (click)="onClick($event)">START</button>
             </div>
         </ng-template>
     </swiper>
