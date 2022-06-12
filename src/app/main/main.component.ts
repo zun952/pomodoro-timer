@@ -16,23 +16,27 @@ Swiper.use([Navigation, Pagination])
 
 export class MainComponent implements OnInit {
   @ViewChild('swiperRef', { static: false }) swiperRef?: SwiperComponent;
+  interval: any;
   timerFocus: Timer;
   timerShortBreak: Timer;
   timerLongBreak: Timer;
 
   constructor(private ngZone: NgZone) {
     this.timerFocus = {
-      time: new Date(0, 0, 0, 0, 15),
+      sec: 900,
+      date: new Date(900 * 1000),
       isRunning: false
     };
   
     this.timerShortBreak = {
-      time: new Date(0, 0, 0, 0, 5),
+      sec: 300,
+      date: new Date(300 * 1000),
       isRunning: false
     };
     
     this.timerLongBreak = {
-      time: new Date(0, 0, 0, 0, 30),
+      sec: 1800,
+      date: new Date(1800 * 1000),
       isRunning: false
     };
   }
@@ -53,6 +57,7 @@ export class MainComponent implements OnInit {
 
   onClick(event: any){
     console.log(event)
+    this.timerShortBreak.date.setMinutes(this.timerShortBreak.date.getMinutes() - 1);
   }
 
   onSwiper(swiper: any){
@@ -61,5 +66,11 @@ export class MainComponent implements OnInit {
 
   onSlideChange([swiper]: any){
     console.log(swiper);
+  }
+
+  startTimer(){
+    this.interval = setInterval(() => {
+      
+    })
   }
 }
