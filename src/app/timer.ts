@@ -1,5 +1,5 @@
 export interface Timer {
-    sec: number,
-    date: Date,
-    isRunning: boolean,
+  sec: number;
+  date: Date;
+  isRunning: boolean;
 }

@@ -1,26 +1,42 @@
 <div id="header">POMODORO TIMER</div>
 <div id="main">
-    <swiper [config]="config" (swiper)="onSwiper($event)" (slideChange)="onSlideChange($event)">
-        <ng-template swiperSlide>
-            <div id="circle">
-                <div id="timer">{{timerFocus.date | date: 'mm:ss'}}</div>
-                <button id="button-start" (click)="onClick($event)" #working>START</button>
-            </div>
-        </ng-template>
+  <swiper
+    [config]="config"
+    (swiper)="onSwiper($event)"
+    (slideChange)="onSlideChange($event)"
+  >
+    <ng-template swiperSlide>
+      <div id="circle">
+        <div id="timer">
+          {{ timers[0].date | date: "mm:ss" }}
+        </div>
+        <button id="button-start" class="focus" (click)="onClick($event)">
+          {{ timers[0].isRunning === false ? 'START' : 'STOP' }}
+        </button>
+      </div>
+    </ng-template>
 
-        <ng-template swiperSlide>
-            <div id="circle">
-                <div id="timer" #shortBreak>{{timerShortBreak.date | date: 'mm:ss'}}</div>
-                <button id="button-start" (click)="onClick($event)" #shortBreak>START</button>
-            </div>
-        </ng-template>
+    <ng-template swiperSlide>
+      <div id="circle">
+        <div id="timer" #shortBreak>
+          {{ timers[1].date | date: "mm:ss" }}
+        </div>
+        <button id="button-start" class="shortBreak" (click)="onClick($event)">
+          {{ timers[1].isRunning === false ? 'START' : 'STOP' }}
+        </button>
+      </div>
+    </ng-template>
 
-        <ng-template swiperSlide>
-            <div id="circle">
-                <div id="timer" #longBreak>{{timerLongBreak.date | date: 'mm:ss'}}</div>
-                <button id="button-start" (click)="onClick($event)" #longBreak>START</button>
-            </div>
-        </ng-template>
-    </swiper>
+    <ng-template swiperSlide>
+      <div id="circle">
+        <div id="timer" #longBreak>
+          {{ timers[2].date | date: "mm:ss" }}
+        </div>
+        <button id="button-start" class="longBreak" (click)="onClick($event)">
+          {{ timers[2].isRunning === false ? 'START' : 'STOP' }}
+        </button>
+      </div>
+    </ng-template>
+  </swiper>
 </div>
 <div id="footer"></div>
