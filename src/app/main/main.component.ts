@@ -99,6 +99,7 @@ export class MainComponent implements OnInit {
       const time = timer.date.getTime() - 1000;
       if (time < 0) {
         console.log('timer end.');
+        clearInterval(this.interval);
         return;
       }
 
