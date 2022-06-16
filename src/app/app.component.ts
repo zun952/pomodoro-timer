@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { getMessaging, getToken, onMessage} from "firebase/messaging";
+
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -37,10 +38,13 @@ export class AppComponent implements OnInit {
 
   listen(){
     const messaging = getMessaging();
+    console.log('Start listening')
 
     onMessage(messaging, (payload) =>{
       console.log('Message received. ', payload);
       this.message = payload;
     });
+
+    console.log(messaging);
   }
 }

@@ -4,12 +4,16 @@ import { SwiperModule } from 'swiper/angular';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
-import { environment } from '../environments/environment';
+
+import { environment } from 'src/environments/environment';
 
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
-import { initializeApp } from 'firebase/app';
+
+import * as firebase from "firebase/app";
+
+firebase.initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [AppComponent, MainComponent],
@@ -18,10 +22,9 @@ import { initializeApp } from 'firebase/app';
     SwiperModule,
     AngularFireModule,
     AngularFireAuthModule,
-    AngularFirestoreModule],
+    AngularFirestoreModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
-
-initializeApp(environment.firebase);

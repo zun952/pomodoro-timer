@@ -29,13 +29,11 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/firebase-massaging-sw.js",
+              "src/firebase-messaging-sw.js",
               "src/manifest.json"
             ],
             "styles": ["src/styles.scss"],
-            "scripts": [],
-            "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -98,9 +96,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/firebase-massaging-sw.js",
-              "src/manifest.json"
+              "src/assets"
             ],
             "styles": ["src/styles.scss"],
             "scripts": []
