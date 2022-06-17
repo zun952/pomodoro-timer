@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { getMessaging, getToken, onMessage} from "firebase/messaging";
+import { getMessaging, getToken, Messaging, onMessage } from "firebase/messaging";
 
 import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-root',
@@ -15,14 +16,15 @@ export class AppComponent implements OnInit {
 
   constructor(){}
 
-  ngOnInit(): void{
-    this.requestPermission();
+  async ngOnInit(): Promise<void>{
+    const messaging = getMessaging();
+
+    await this.requestPermission(messaging);
     this.listen();
   }
 
-  requestPermission(){
-    const messaging = getMessaging();
-    getToken(messaging, { vapidKey: environment.firebase.vapidKey })
+  async requestPermission(messaging: Messaging){
+    await getToken(messaging, { vapidKey: environment.firebase.vapidKey })
       .then(currentToken => {
         if(currentToken){
           console.log("Got a token");
@@ -44,7 +46,5 @@ export class AppComponent implements OnInit {
       console.log('Message received. ', payload);
       this.message = payload;
     });
-
-    console.log(messaging);
   }
 }
