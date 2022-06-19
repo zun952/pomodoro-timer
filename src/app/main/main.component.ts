@@ -1,7 +1,6 @@
 import {
   Component,
   OnInit,
-  NgZone,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -17,15 +16,14 @@ Swiper.use([Navigation, Pagination]);
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class MainComponent implements OnInit {
   @ViewChild('swiperRef', { static: false }) swiperRef?: SwiperComponent;
   interval: ReturnType<typeof setTimeout> = setTimeout(() => {}, 1000);
-
   timers: Timer[] = [];
 
-  constructor(private ngZone: NgZone) {
+  constructor() {
     const timerFocus: Timer = {
       sec: 900,
       date: new Date(900 * 1000),

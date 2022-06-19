@@ -1,24 +1,19 @@
-importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js');
-importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js');
+// importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js');
+// importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js');
 
-// import { getMessaging } from "firebase/messaging";
-// import { onBackgroundMessage } from "firebase/messaging/sw";
+import { initializeApp } from "firebase/app";
+import { getMessaging, onBackgroundMessage } from "firebase/messaging/sw";
+import { BroadcastChannel } from "worker_threads";
 
-// const messaging = getMessaging(firebaseApp);
-// console.log('Start listening')
+import { environment } from "./environments/environment";
 
-// onMessage(messaging, (payload) =>{
-//   console.log('Message received. ', payload);
-//   this.message = payload;
-// });
+const messaging = getMessaging(initializeApp(environment));
+const broadcast = new BroadcastChannel('FCMService');
 
-// onBackgroundMessage(messaging, (payload) => {
-//   console.log('[firebase-messaging-sw.js] Received background message ', payload);
+onBackgroundMessage(messaging, (payload) => {
+    broadcast.postMessage(payload);
+});
 
-//   const notificationTitle = 'Background Message Title: ';
-//   const notificationOptions = {
-//       body: payload
-//   };
-// });
-
-// console.log(messaging);
+this.broadcast.onmessage = (event) => {
+    console.log(event.data);
+};

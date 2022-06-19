@@ -22,7 +22,7 @@ firebase.initializeApp(environment.firebase);
     SwiperModule,
     AngularFireModule,
     AngularFireAuthModule,
-    AngularFirestoreModule,
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent],
