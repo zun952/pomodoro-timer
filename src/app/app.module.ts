@@ -5,13 +5,16 @@ import { SwiperModule } from 'swiper/angular';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 
-import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
-import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { AngularFireMessagingModule } from "@angular/fire/compat/messaging";
+import { AngularFireModule } from "@angular/fire/compat";
 
 import { environment } from 'src/environments/environment';
 
 import * as firebase from "firebase/app";
+import { FCMService } from './fcm.service';
+import { AsyncPipe } from '@angular/common';
 
 firebase.initializeApp(environment.firebase);
 
@@ -20,11 +23,15 @@ firebase.initializeApp(environment.firebase);
   imports: [
     BrowserModule,
     SwiperModule,
-    AngularFireModule,
+    AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFireMessagingModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
-  providers: [],
+  providers: [
+    FCMService,
+    AsyncPipe
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
