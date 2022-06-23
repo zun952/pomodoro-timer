@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # ETC
-service_account.ts
+service_account.json

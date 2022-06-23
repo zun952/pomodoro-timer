@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from "@angular/common/http";
 import { SwiperModule } from 'swiper/angular';
 
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ firebase.initializeApp(environment.firebase);
   declarations: [AppComponent, MainComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     SwiperModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
