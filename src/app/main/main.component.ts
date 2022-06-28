@@ -7,8 +7,10 @@ import {
 
 import { Navigation, Pagination, Swiper, SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
+import { FCMService } from '../fcm.service';
 
 import { Timer } from '../timer';
+import { sendNotification } from "../utils";
 
 Swiper.use([Navigation, Pagination]);
 
@@ -23,7 +25,7 @@ export class MainComponent implements OnInit {
   interval: ReturnType<typeof setTimeout> = setTimeout(() => {}, 1000);
   timers: Timer[] = [];
 
-  constructor() {
+  constructor(private fcm: FCMService) {
     const timerFocus: Timer = {
       sec: 900,
       date: new Date(900 * 1000),
@@ -98,6 +100,8 @@ export class MainComponent implements OnInit {
       if (time < 0) {
         console.log('timer end.');
         clearInterval(this.interval);
+
+        sendNotification(this.fcm.token);
         return;
       }
 
@@ -119,5 +123,9 @@ export class MainComponent implements OnInit {
     timer.date = new Date(timer.sec * 1000);
 
     console.log('timer reset.');
+  }
+
+  onClickTest(){
+    sendNotification(this.fcm.token);
   }
 }

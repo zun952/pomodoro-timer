@@ -1,20 +1,19 @@
 import { Injectable } from '@angular/core';
 
 import { AngularFireMessaging } from "@angular/fire/compat/messaging";
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FCMService {
-  message = new BehaviorSubject(null);
-
+  token = '';
   constructor(private fireMessaging: AngularFireMessaging) {  }
 
-  requestToken(): void{
+  requestToken(){
     this.fireMessaging.requestToken.subscribe({
       next: token => {
-        console.log('I gotta token', token);
+        // console.log('I gotta token', token);
+        this.token = token!;
       },
       error: err => {
         console.log('error: ', err);
@@ -22,20 +21,20 @@ export class FCMService {
     });
   }
   
-  receiveMessage(): void{
-    this.fireMessaging.messages.subscribe((payload: any) => {
-      console.log(`Foreground message: ${payload}`);
-      const NotificationOptions = {
-        body: payload.notification.body,
-        data: payload.data,
-        icon: payload.notification.icon
+  receiveMessage(){
+    this.fireMessaging.messages.subscribe((payload) => {
+      console.log(payload);
+      const notificationTitle = payload.notification?.title;
+      const notificationOptions = {
+        body: payload.notification?.body,
+        icon: payload.notification?.image
       };
 
-      navigator.serviceWorker.getRegistration('/firebase-messaging-sw.js').then(registration => {
-        registration?.showNotification(payload.notification.title, NotificationOptions);
-      });
-
-      this.message.next(payload);
+      if(!("Notification" in window)){
+        console.log("This browser doesn't support system notification.");
+      } else if(Notification.permission == "granted"){
+        new Notification(notificationTitle!, notificationOptions);
+      }
     });
   }
 }
