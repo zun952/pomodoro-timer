@@ -82,14 +82,14 @@ export class MainComponent implements OnInit {
 
   onSlideChange([swiper]: any) {
     console.log(swiper);
-    this.resetTimer(this.timers[swiper.activeIndex]);
+    this.stopTimer(this.timers[swiper.activeIndex], 'reset');
   }
 
   executeTimer(timer: Timer) {
     if (!timer.isRunning)
       this.startTimer(timer);
     else
-      this.pauseTimer(timer);
+      this.stopTimer(timer, 'pause');
   }
 
   startTimer(timer: Timer) {
@@ -99,7 +99,7 @@ export class MainComponent implements OnInit {
       const time = timer.date.getTime() - 1000;
       if (time < 0) {
         console.log('timer end.');
-        clearInterval(this.interval);
+        this.stopTimer(timer, 'reset');
 
         sendNotification(this.fcm.token);
         return;
@@ -111,20 +111,25 @@ export class MainComponent implements OnInit {
     console.log('timer start.')
   }
 
-  pauseTimer(timer: Timer) {
+  stopTimer(timer: Timer, condition: string){
     timer.isRunning = false;
     clearInterval(this.interval);
-    
-    console.log('timer stopped.');
+
+    switch(condition){
+      case 'pause':
+        console.log('timer stopped.');
+        break;
+
+      case 'reset':
+        timer.date = new Date(timer.sec * 1000);
+        console.log('timer reset.');
+        break;
+
+      default:
+        return;
+    }
   }
-
-  resetTimer(timer: Timer) {
-    this.pauseTimer(timer);
-    timer.date = new Date(timer.sec * 1000);
-
-    console.log('timer reset.');
-  }
-
+  
   onClickTest(){
     sendNotification(this.fcm.token);
   }

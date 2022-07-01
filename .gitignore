@@ -42,6 +42,6 @@ testem.log
 Thumbs.db
 
 # ETC
-utils.ts
-environments.ts
-firebase-messaging-sw.js
+src/firebase-messaging-sw.js
+src/app/utils.ts
+src/environments/environment.ts
