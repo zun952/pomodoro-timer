@@ -24,21 +24,29 @@ export class MainComponent implements OnInit {
   @ViewChild('swiperRef', { static: false }) swiperRef?: SwiperComponent;
   interval: ReturnType<typeof setTimeout> = setTimeout(() => {}, 1000);
   timers: Timer[] = [];
+  currentTimer = 0;
+
+  focus = 20;
+  shortBreak = 5;
+  longBreak = 30;
 
   constructor(private fcm: FCMService) {
     const timerFocus: Timer = {
-      sec: 900,
-      date: new Date(900 * 1000),
+      type: 'focus',
+      sec: this.focus,
+      date: new Date(this.focus * 60000),
       isRunning: false,
     };
     const timerShortBreak: Timer = {
-      sec: 300,
-      date: new Date(300 * 1000),
+      type: 'short break',
+      sec: this.shortBreak,
+      date: new Date(this.shortBreak * 60000),
       isRunning: false,
     };
     const timerLongBreak: Timer = {
-      sec: 1800,
-      date: new Date(1800 * 1000),
+      type: 'long break',
+      sec: this.longBreak,
+      date: new Date(this.longBreak * 60000),
       isRunning: false,
     };
 
@@ -57,8 +65,17 @@ export class MainComponent implements OnInit {
     spaceBetween: 0,
   };
 
-  onClick(event: any) {
-    switch (event.target.className) {
+  onTimeChanged(event: any){
+    if(event.target.value >= 60) event.target.value = 59;
+    if(event.target.value < 0) event.target.value = 0;
+    
+    this.timers[this.currentTimer].sec = event.target.value;
+    console.log(this.currentTimer);
+    this.stopTimer(this.timers[this.currentTimer], "reset");
+  }
+
+  onClick(event: any, timer: Timer) {
+    switch (timer.type) {
       case 'focus':
         this.executeTimer(this.timers[0]);
         break;
@@ -70,19 +87,15 @@ export class MainComponent implements OnInit {
       case 'longBreak':
         this.executeTimer(this.timers[2]);
         break;
-
-      default:
-        return;
     }
   }
 
-  onSwiper(swiper: any) {
-    console.log(swiper);
-  }
+  onSwiper(swiper: any) { }
 
   onSlideChange([swiper]: any) {
-    console.log(swiper);
-    this.stopTimer(this.timers[swiper.activeIndex], 'reset');
+    this.currentTimer = swiper.activeIndex;
+
+    this.stopTimer(this.timers[this.currentTimer], 'reset');
   }
 
   executeTimer(timer: Timer) {
@@ -101,7 +114,7 @@ export class MainComponent implements OnInit {
         console.log('timer end.');
         this.stopTimer(timer, 'reset');
 
-        sendNotification(this.fcm.token);
+        sendNotification(this.fcm.token, timer.type);
         return;
       }
 
@@ -121,7 +134,7 @@ export class MainComponent implements OnInit {
         break;
 
       case 'reset':
-        timer.date = new Date(timer.sec * 1000);
+        timer.date = new Date(timer.sec * 60000);
         console.log('timer reset.');
         break;
 
@@ -129,8 +142,12 @@ export class MainComponent implements OnInit {
         return;
     }
   }
+
+  isTimerRunning(): boolean{
+    return this.timers[this.currentTimer].isRunning;
+  }
   
   onClickTest(){
-    sendNotification(this.fcm.token);
+    sendNotification(this.fcm.token, 'test');
   }
 }

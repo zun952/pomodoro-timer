@@ -1,9 +1,9 @@
-const sendNotification = (target: string) => {
+const sendNotification = (target: string, message: string) => {
     const key = '';
     const to = target;
     const notification = {
         'title': 'Pomodoro Timer',
-        'body': 'The time has come',
+        'body': `${message} is over`,
         'image': 'tomato-logo.png'
     }
 

@@ -12,7 +12,6 @@ export class FCMService {
   requestToken(){
     this.fireMessaging.requestToken.subscribe({
       next: token => {
-        // console.log('I gotta token', token);
         this.token = token!;
       },
       error: err => {
@@ -23,7 +22,6 @@ export class FCMService {
   
   receiveMessage(){
     this.fireMessaging.messages.subscribe((payload) => {
-      console.log(payload);
       const notificationTitle = payload.notification?.title;
       const notificationOptions = {
         body: payload.notification?.body,

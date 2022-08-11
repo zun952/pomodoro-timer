@@ -10,7 +10,7 @@
 // TODO: width under 540 then shrink it
 #main {
   width: 500px;
-  margin-top: 16%;
+  margin-top: 5%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -25,10 +25,18 @@
 }
 
 #timer {
-  padding-top: 40%;
+  padding-top: 20%;
   font-weight: bold;
   color: white;
   font-size: xxx-large;
+}
+
+#timer-title{
+  padding-top: 20px;
+  font-size: xx-large;
+  font-weight: bolder;
+  
+  color: rgb(165, 7, 165);
 }
 
 #button-start {
@@ -37,6 +45,25 @@
   color: white;
   background: purple;
   border-color: purple;
-  font-family: Consolas;
   font-size: larger;
+}
+
+#setting {
+  color: white;
+  min-width: 230px;
+  max-width: 300px;
+  margin-left: 67%;
+  font-size: large;
+}
+
+#setting-element {
+  min-width: 90%;
+  display: flex;
+  padding: 5px;
+}
+
+#input {
+  width: 70px;
+  margin-left: auto;
+  margin-right: 5px;
 }

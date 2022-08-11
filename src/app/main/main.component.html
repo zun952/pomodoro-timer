@@ -1,44 +1,45 @@
-<div id="header">POMODORO TIMER</div>
-<div id="main">
+<header id="header">
+  <div>pomodoro timer</div>
+</header>
+
+<section id="setting">
+  <div id="setting-element">
+    <div>Focus</div>
+    <input id="input" type="number" [readonly]="isTimerRunning()" [ngModel]="focus" (change)="onTimeChanged($event)">
+    <div style="font-size: medium;">mins</div>
+  </div>
+  <div id="setting-element">
+    <div>Short break</div>
+    <input id="input" type="number" [readonly]="isTimerRunning()" [ngModel]="shortBreak" (change)="onTimeChanged($event)">
+    <div style="font-size: medium;">mins</div>
+  </div>
+  <div id="setting-element">
+    <div>Long break</div>
+    <input id="input" type="number" [readonly]="isTimerRunning()" [ngModel]="longBreak" (change)="onTimeChanged($event)">
+    <div style="font-size: medium;">mins</div>
+  </div>
+</section>
+
+<section id="main">
   <swiper
     [config]="config"
     (swiper)="onSwiper($event)"
-    (slideChange)="onSlideChange($event)"
-  >
-    <ng-template swiperSlide>
+    (slideChange)="onSlideChange($event)">
+
+    <ng-template swiperSlide *ngFor="let timer of timers">
       <div id="circle">
+        <div id="timer-title">{{ timer.type }}</div>
         <div id="timer">
-          {{ timers[0].date | date: "mm:ss" }}
+          {{ timer.date | date: "mm:ss" }}
         </div>
-        <button id="button-start" class="focus" (click)="onClick($event)">
-          {{ timers[0].isRunning === false ? 'START' : 'STOP' }}
-        </button>
-      </div>
-    </ng-template>
-
-    <ng-template swiperSlide>
-      <div id="circle">
-        <div id="timer" #shortBreak>
-          {{ timers[1].date | date: "mm:ss" }}
-        </div>
-        <button id="button-start" class="shortBreak" (click)="onClick($event)">
-          {{ timers[1].isRunning === false ? 'START' : 'STOP' }}
-        </button>
-      </div>
-    </ng-template>
-
-    <ng-template swiperSlide>
-      <div id="circle">
-        <div id="timer" #longBreak>
-          {{ timers[2].date | date: "mm:ss" }}
-        </div>
-        <button id="button-start" class="longBreak" (click)="onClick($event)">
-          {{ timers[2].isRunning === false ? 'START' : 'STOP' }}
+        <button id="button-start" (click)="onClick($event, timer)">
+          {{ timer.isRunning === false ? 'START' : 'STOP' }}
         </button>
       </div>
     </ng-template>
   </swiper>
-</div>
-<div id="footer">
+</section>
+
+<footer id="footer">
   <button (click)="onClickTest()">push test</button>
-</div>
+</footer>
