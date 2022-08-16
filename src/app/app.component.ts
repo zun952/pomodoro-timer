@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FCMService } from "./fcm.service";
+import { FCMService } from "./core/services/fcm.service";
 
 @Component({
   selector: 'app-root',

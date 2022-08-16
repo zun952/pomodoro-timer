@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SwiperModule } from 'swiper/angular';
-import { FCMService } from '../fcm.service';
+import { FCMService } from '../../services/fcm.service';
 
 import { MainComponent } from './main.component';
 

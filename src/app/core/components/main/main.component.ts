@@ -7,10 +7,10 @@ import {
 
 import { Navigation, Pagination, Swiper, SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
-import { FCMService } from '../fcm.service';
+import { FCMService } from '../../services/fcm.service';
 
-import { Timer } from '../timer';
-import { sendNotification } from "../utils";
+import { Timer } from '../../../timer';
+import { sendNotification } from "../../../utils";
 
 Swiper.use([Navigation, Pagination]);
 

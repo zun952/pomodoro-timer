@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test --no-watch --no-progress --browsers=ChromeHeadlessCI"
+    "test": "ng test --no-watch --no-progress --browsers=ChromeHeadlessCI",
+    "preview": "npm run build && firebase hosting:channel:deploy pomodoro_preview"
   },
   "private": true,
   "dependencies": {
