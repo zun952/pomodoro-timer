@@ -1,36 +1,21 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
-import { AngularFireModule } from "@angular/fire/compat";
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { SwiperModule } from 'swiper/angular';
 import { AppComponent } from './app.component';
-import { FCMService } from './fcm.service';
 
 import { environment } from 'src/environments/environment';
 
 describe('AppComponent', () => {
-  let fcmService: FCMService;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserModule,
         HttpClientModule,
-        SwiperModule,
-        FormsModule,
-        AngularFireDatabaseModule,
-        AngularFireAuthModule,
-        AngularFireMessagingModule,
-        AngularFireModule.initializeApp(environment.firebase)
+        FormsModule
       ],
       declarations: [AppComponent],
-      providers:[
-        { provide: FCMService, useValue: fcmService }
-      ]
+      providers:[ ]
     }).compileComponents();
   });
 

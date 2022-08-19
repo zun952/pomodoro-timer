@@ -1,27 +1,19 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
-
-import { Navigation, Pagination, Swiper, SwiperOptions } from 'swiper';
+import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Timer } from './interfaces/timer';
+import { sendNotification } from 'app/utils';
+import { SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
-import { FCMService } from '../../services/fcm.service';
+import { FCMService } from './services/fcm.service';
 
-import { Timer } from '../../../timer';
-import { sendNotification } from "../../../utils";
-
-Swiper.use([Navigation, Pagination]);
-
+@Inject(FCMService)
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
+  selector: 'app-timer',
+  templateUrl: './timer.component.html',
+  styleUrls: ['./timer.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class MainComponent implements OnInit {
-  @ViewChild('swiperRef', { static: false }) swiperRef?: SwiperComponent;
+export class TimerComponent implements OnInit {
+  @ViewChild('swiperRef', { static: false}) swiperRef?: SwiperComponent;
   interval: ReturnType<typeof setTimeout> = setTimeout(() => {}, 1000);
   timers: Timer[] = [];
   currentTimer = 0;
@@ -31,6 +23,9 @@ export class MainComponent implements OnInit {
   longBreak = 30;
 
   constructor(private fcm: FCMService) {
+    this.fcm.requestToken();
+    this.fcm.receiveMessage();
+
     const timerFocus: Timer = {
       type: 'focus',
       sec: this.focus,
@@ -55,37 +50,34 @@ export class MainComponent implements OnInit {
     this.timers.push(timerLongBreak);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   config: SwiperOptions = {
     slidesPerView: 'auto',
     autoHeight: true,
     pagination: true,
     navigation: true,
-    spaceBetween: 0,
+    spaceBetween: 0
   };
 
-  onTimeChanged(event: any){
+  onTimerChanged(event: any) {
     if(event.target.value >= 60) event.target.value = 59;
-    if(event.target.value < 0) event.target.value = 0;
-    
-    this.timers[this.currentTimer].sec = event.target.value;
+    else if(event.target.value < 0) event.target.value = 0;
+
     console.log(this.currentTimer);
+    this.timers[this.currentTimer].sec = event.target.value;
     this.stopTimer(this.timers[this.currentTimer], "reset");
   }
 
-  onClick(event: any, timer: Timer) {
-    switch (timer.type) {
+  onClick(timer: Timer) {
+    switch(timer.type) {
       case 'focus':
-        this.executeTimer(this.timers[0]);
         break;
 
       case 'shortBreak':
-        this.executeTimer(this.timers[1]);
         break;
-
+      
       case 'longBreak':
-        this.executeTimer(this.timers[2]);
         break;
     }
   }
@@ -94,23 +86,22 @@ export class MainComponent implements OnInit {
 
   onSlideChange([swiper]: any) {
     this.currentTimer = swiper.activeIndex;
-
-    this.stopTimer(this.timers[this.currentTimer], 'reset');
+    this.stopTimer(this.timers[this.currentTimer], "reset");
   }
 
   executeTimer(timer: Timer) {
-    if (!timer.isRunning)
+    if(!timer.isRunning)
       this.startTimer(timer);
     else
       this.stopTimer(timer, 'pause');
   }
 
-  startTimer(timer: Timer) {
+  startTimer(timer: Timer){
     timer.isRunning = true;
 
     this.interval = setInterval(() => {
       const time = timer.date.getTime() - 1000;
-      if (time < 0) {
+      if(time < 0){
         console.log('timer end.');
         this.stopTimer(timer, 'reset');
 
@@ -121,14 +112,14 @@ export class MainComponent implements OnInit {
       timer.date = new Date(time);
     }, 1000);
 
-    console.log('timer start.')
+    console.log('timer start.');
   }
 
-  stopTimer(timer: Timer, condition: string){
+  stopTimer(timer: Timer, condition: string) {
     timer.isRunning = false;
     clearInterval(this.interval);
 
-    switch(condition){
+    switch(condition) {
       case 'pause':
         console.log('timer stopped.');
         break;
@@ -143,11 +134,11 @@ export class MainComponent implements OnInit {
     }
   }
 
-  isTimerRunning(): boolean{
+  isTimerRunning(): boolean {
     return this.timers[this.currentTimer].isRunning;
   }
-  
-  onClickTest(){
+
+  onClickTest() {
     sendNotification(this.fcm.token, 'test');
   }
 }

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireMessagingModule } from '@angular/fire/compat/messaging';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../../environments/environment';
 
 import { FCMService } from './fcm.service';
 

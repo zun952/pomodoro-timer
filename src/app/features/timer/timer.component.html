@@ -1,0 +1,39 @@
+<section id="setting">
+	<div id="setting-element">
+		<div>Focus</div>
+		<input id="input" type="number" [readonly]="isTimerRunning()" [ngModel]="focus" (change)="onTimerChanged($event)">
+		<div style="font-size: medium;">mins</div>
+	</div>
+	<div id="setting-element">
+		<div>Short break</div>
+		<input id="input" type="number" [readonly]="isTimerRunning()" [ngModel]="shortBreak" (change)="onTimerChanged($event)">
+		<div style="font-size: medium;">mins</div>
+	</div>
+	<div id="setting-element">
+		<div>Long break</div>
+		<input id="input" type="number" [readonly]="isTimerRunning()" [ngModel]="longBreak" (change)="onTimerChanged($event)">
+		<div style="font-size: medium;">mins</div>
+	</div>
+</section>
+
+<section id="main">
+	<swiper
+		[config]="config"
+		(swiper)="onSwiper($event)"
+		(slideChange)="onSlideChange($event)">
+
+		<ng-template swiperSlide *ngFor="let timer of timers">
+			<div id="circle">
+				<div id="timer-title">{{ timer.type }}</div>
+				<div id="timer">
+					{{ timer.date | date: "mm:ss" }}
+				</div>
+				<button id="button-start" (click)="onClick(timer)">
+					{{ timer.isRunning === false ? 'START' : 'STOP' }}
+				</button>
+			</div>
+		</ng-template>
+	</swiper>
+</section>
+
+<button (click)="onClickTest()">push test</button>

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FCMService } from "./core/services/fcm.service";
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,11 +8,7 @@ import { FCMService } from "./core/services/fcm.service";
 export class AppComponent implements OnInit {
   title: any = "pomodoro timer";
 
-  constructor(private fcm: FCMService) {
-    this.fcm.requestToken();
-    this.fcm.receiveMessage();
-  }
+  constructor() { }
 
-  ngOnInit(){
-  }
+  ngOnInit() { }
 }

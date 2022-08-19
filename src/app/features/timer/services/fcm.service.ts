@@ -2,21 +2,16 @@ import { Injectable } from '@angular/core';
 
 import { AngularFireMessaging } from "@angular/fire/compat/messaging";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class FCMService {
   token = '';
+  
   constructor(private fireMessaging: AngularFireMessaging) {  }
 
   requestToken(){
     this.fireMessaging.requestToken.subscribe({
-      next: token => {
-        this.token = token!;
-      },
-      error: err => {
-        console.log('error: ', err);
-      }
+      next: token => this.token = token!,
+      error: err => console.log('error: ', err)
     });
   }
   
