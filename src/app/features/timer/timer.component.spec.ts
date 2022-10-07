@@ -1,25 +1,29 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TestBed } from '@angular/core/testing';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 import { TimerComponent } from './timer.component';
 
-describe('TimerComponent', () => {
-  let component: TimerComponent;
-  let fixture: ComponentFixture<TimerComponent>;
+import { environment } from "app/../environments/environment";
 
+describe('TimerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TimerComponent ]
-    })
-    .compileComponents();
+      imports: [
+        BrowserModule,
+        FormsModule
+      ],
+      declarations: [TimerComponent],
+      providers:[
+        { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+      ]
+    }).compileComponents();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TimerComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(TimerComponent);
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
   });
 });

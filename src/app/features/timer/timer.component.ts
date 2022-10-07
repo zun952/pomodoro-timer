@@ -1,9 +1,11 @@
 import { Component, Inject, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Timer } from './interfaces/timer';
 import { sendNotification } from 'app/utils';
-import { SwiperOptions } from 'swiper';
+import Swiper, { Navigation, Pagination, SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { FCMService } from './services/fcm.service';
+
+Swiper.use([Navigation, Pagination]);
 
 @Inject(FCMService)
 @Component({
@@ -17,10 +19,18 @@ export class TimerComponent implements OnInit {
   interval: ReturnType<typeof setTimeout> = setTimeout(() => {}, 1000);
   timers: Timer[] = [];
   currentTimer = 0;
-
+  
   focus = 20;
   shortBreak = 5;
   longBreak = 30;
+
+  config: SwiperOptions = {
+    slidesPerView: 'auto',
+    autoHeight: true,
+    pagination: { clickable: false },
+    navigation: true,
+    spaceBetween: 100
+  };
 
   constructor(private fcm: FCMService) {
     this.fcm.requestToken();
@@ -52,14 +62,6 @@ export class TimerComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  config: SwiperOptions = {
-    slidesPerView: 'auto',
-    autoHeight: true,
-    pagination: true,
-    navigation: true,
-    spaceBetween: 0
-  };
-
   onTimerChanged(event: any) {
     if(event.target.value >= 60) event.target.value = 59;
     else if(event.target.value < 0) event.target.value = 0;
@@ -70,16 +72,17 @@ export class TimerComponent implements OnInit {
   }
 
   onClick(timer: Timer) {
-    switch(timer.type) {
-      case 'focus':
-        break;
+    this.executeTimer(timer);
+    // switch(timer.type) {
+    //   case 'focus':
+    //     break;
 
-      case 'shortBreak':
-        break;
+    //   case 'shortBreak':
+    //     break;
       
-      case 'longBreak':
-        break;
-    }
+    //   case 'longBreak':
+    //     break;
+    // }
   }
 
   onSwiper(swiper: any) { }

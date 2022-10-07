@@ -13,11 +13,12 @@ import { environment } from 'environments/environment';
 import { TimerComponent } from './timer.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { PieTimerComponent } from './components/pie-timer/pie-timer.component';
 
 firebase.initializeApp(environment.firebase);
 
 @NgModule({
-  declarations: [TimerComponent],
+  declarations: [TimerComponent, PieTimerComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -27,6 +28,7 @@ firebase.initializeApp(environment.firebase);
     AngularFireAuthModule,
     AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    
   ],
   providers: [
     FCMService,
