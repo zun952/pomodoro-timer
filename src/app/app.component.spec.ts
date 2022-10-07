@@ -2,9 +2,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { TimerComponent } from '@timer/timer.component';
 import { AppComponent } from './app.component';
-
-import { environment } from 'src/environments/environment';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -15,7 +14,7 @@ describe('AppComponent', () => {
         FormsModule
       ],
       declarations: [AppComponent],
-      providers:[ ]
+      providers:[]
     }).compileComponents();
   });
 
@@ -29,14 +28,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('pomodoro timer');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'pomodoro timer app is running!'
-    );
   });
 });

@@ -24,19 +24,26 @@
   background: rgb(78, 3, 78);
 }
 
-#timer {
-  padding-top: 20%;
-  font-weight: bold;
-  color: white;
-  font-size: xxx-large;
+#pie-info{
+  position: absolute;
+  top: 19%;
+  left: 38%;
+  align-items: center;
+  justify-items: center;
 }
 
 #timer-title{
   padding-top: 20px;
   font-size: xx-large;
   font-weight: bolder;
-  
   color: rgb(165, 7, 165);
+}
+
+#timer {
+  padding-top: 20%;
+  font-weight: bold;
+  color: white;
+  font-size: xxx-large;
 }
 
 #button-start {
@@ -67,3 +74,4 @@
   margin-left: auto;
   margin-right: 5px;
 }
+

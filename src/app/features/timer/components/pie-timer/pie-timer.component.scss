@@ -1,0 +1,30 @@
+circle{
+  stroke: black;
+  stroke-width: 1;
+  fill: none;
+}
+
+path{
+  fill: powderblue;
+  fill-opacity: 0.4;
+}
+
+line{
+  stroke: red;
+  stroke-width: 1;
+}
+
+.pie{
+  height: 350px;
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  background: rgb(78, 3, 78);
+}
+
+.arc{
+  fill: none;
+  stroke: blue;
+  stroke-width: 2;
+}

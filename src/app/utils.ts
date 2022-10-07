@@ -1,5 +1,7 @@
+import { environment } from "../environments/environment";
+
 const sendNotification = (target: string, message: string) => {
-    const key = '';
+    const key = environment.firebase.fcmKey;
     const to = target;
     const notification = {
         'title': 'Pomodoro Timer',
@@ -19,7 +21,7 @@ const sendNotification = (target: string, message: string) => {
         })
     }).then((response) => {
         console.log(response);
-    }).then((error) => {
+    }).catch((error) => {
         console.log(error);
     })
 }

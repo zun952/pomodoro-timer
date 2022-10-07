@@ -23,7 +23,8 @@
 		(slideChange)="onSlideChange($event)">
 
 		<ng-template swiperSlide *ngFor="let timer of timers">
-			<div id="circle">
+			
+			<div id="pie-info">
 				<div id="timer-title">{{ timer.type }}</div>
 				<div id="timer">
 					{{ timer.date | date: "mm:ss" }}
@@ -32,6 +33,8 @@
 					{{ timer.isRunning === false ? 'START' : 'STOP' }}
 				</button>
 			</div>
+			<app-pie-timer>
+			</app-pie-timer>
 		</ng-template>
 	</swiper>
 </section>
