@@ -12,7 +12,8 @@ export const environment = {
     messagingSenderId: "",
     appId: "",
     measurementId: "",
-    vapidKey: ""
+    vapidKey: "",
+    fcmKey: ""
   }
 };
 
