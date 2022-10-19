@@ -25,8 +25,14 @@ export class FCMService {
 
       if(!("Notification" in window)){
         console.log("This browser doesn't support system notification.");
-      } else if(Notification.permission == "granted"){
+        return;
+      } 
+
+      if(Notification.permission == "granted"){
+        console.log("push notification sent");
         new Notification(notificationTitle!, notificationOptions);
+      } else{
+        console.log("check your web push permission");
       }
     });
   }
